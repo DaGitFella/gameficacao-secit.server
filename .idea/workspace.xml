@@ -4,24 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ada608f-2941-4f70-90ba-114eb5d0834f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gameficacao_secit_server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gameficacao_secit_server.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/models.py" afterDir="false" />
+    <list default="true" id="2ada608f-2941-4f70-90ba-114eb5d0834f" name="Changes" comment="merge">
+      <change afterPath="$PROJECT_DIR$/api/models/activity.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/models/user.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/serializers/event.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/serializers/user.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/tests/event_environment_manager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/tests/user.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/views/event.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/tests/event.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/views/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameficacao_secit_server/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/gameficacao_secit_server/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2kbRTslQlSwg80oT1KjkVnvoO3N" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -32,6 +48,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/isaque/PycharmProjects/gameficacao_secit_server/api/views",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -41,6 +58,13 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/api/views" />
+      <recent name="$PROJECT_DIR$/api/tests" />
+      <recent name="$PROJECT_DIR$/api/models" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -68,5 +92,7 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/gameficacao-secit.server" />
     </ignored-roots>
+    <MESSAGE value="merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge" />
   </component>
 </project>
