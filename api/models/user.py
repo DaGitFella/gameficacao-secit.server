@@ -1,6 +1,8 @@
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.db import models
 
+from api.models.activity import Activity
+from api.models.award import Award
 from api.models.event import Event
 
 
@@ -23,6 +25,8 @@ class User(AbstractBaseUser):
     username = models.CharField(max_length=128, unique=True)
     is_admin = models.BooleanField(default=False)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    activities = models.ManyToManyField(Activity, blank=True)
+    awards = models.ManyToManyField(Award, blank=True)
 
     objects = UserManager()
     USERNAME_FIELD = 'username'

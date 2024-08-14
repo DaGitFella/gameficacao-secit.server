@@ -1,8 +1,6 @@
-from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.db import models
 
 from api.models.event import Event
-from api.models.stamp import Stamp
 
 
 class ConquestManager(models.Manager):
@@ -17,10 +15,9 @@ class ConquestManager(models.Manager):
 
 
 class Conquest(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     color = models.CharField(max_length=255)
     required_stamps = models.IntegerField()
-    stamp = models.ForeignKey(Stamp, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
 
     objects = ConquestManager()

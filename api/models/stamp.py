@@ -1,6 +1,6 @@
-from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.db import models
 
+from api.models.conquest import Conquest
 from api.models.event import Event
 
 
@@ -18,5 +18,6 @@ class StampManager(models.Manager):
 class Stamp(models.Model):
     icon = models.CharField(max_length=128)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    conquest = models.ForeignKey(Conquest, on_delete=models.CASCADE)
 
     objects = StampManager()

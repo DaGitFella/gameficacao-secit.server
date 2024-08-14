@@ -27,7 +27,7 @@ class Activity(models.Model):
 
     stamps_amount = models.IntegerField()
     timestamp = models.DateTimeField()
-    type = models.CharField(max_length=32, choices=PossibleTypes)
+    type = models.CharField(max_length=64, choices=PossibleTypes)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
 
     objects = ActivityManager()
