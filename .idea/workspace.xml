@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2ada608f-2941-4f70-90ba-114eb5d0834f" name="Changes" comment="start models">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/activity.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/activity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/award.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/award.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/conquest.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/conquest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/stamp.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/stamp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/user_makes_activity.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tests/event_environment_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/tests/event_environment_manager.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "isaque-dantas"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/DaGitFella/gameficacao-secit.server.git",
+    "accountId": "ba9ea831-1d70-4b56-8787-fedc858cd787"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2kbRTslQlSwg80oT1KjkVnvoO3N" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/isaque/PycharmProjects/gameficacao_secit_server",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/api/views" />
+      <recent name="$PROJECT_DIR$/api/tests" />
+      <recent name="$PROJECT_DIR$/api/models" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-PY-242.20224.347" />
+        <option value="bundled-python-sdk-c2d6afa66fbe-39cff9de6eef-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.20224.347" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2ada608f-2941-4f70-90ba-114eb5d0834f" name="Changes" comment="" />
+      <created>1723550302322</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1723550302322</updated>
+      <workItem from="1723550304623" duration="2865000" />
+      <workItem from="1723665680507" duration="3407000" />
+    </task>
+    <task id="LOCAL-00001" summary="start models">
+      <option name="closed" value="true" />
+      <created>1723584144005</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1723584144005</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/gameficacao-secit.server" />
+    </ignored-roots>
+    <MESSAGE value="merge" />
+    <MESSAGE value="start models" />
+    <option name="LAST_COMMIT_MESSAGE" value="start models" />
+  </component>
+</project>
