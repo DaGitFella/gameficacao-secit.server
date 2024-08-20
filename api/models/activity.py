@@ -2,6 +2,7 @@ from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.db import models
 
 from api.models.event import Event
+from api.models.stamp import Stamp
 
 
 class ActivityManager(models.Manager):
@@ -16,18 +17,11 @@ class ActivityManager(models.Manager):
 
 
 class Activity(models.Model):
-    class PossibleTypes(models.TextChoices):
-        PPMR = "painel-palestra-mesa-roda"
-        PRESENTER = "apresentador"
-        MINI_COURSE_or_MARKETING = "minicurso-desafio_marketing"
-        QUESTION = "pergunta"
-        PRESENTATION = "estande-sipex-integrador-desafio_marketing"
-        MOCITEC = "networking-mociteczn"
-        VOLUNTEER = "voluntario"
 
     stamps_amount = models.IntegerField()
     timestamp = models.DateTimeField()
-    type = models.CharField(max_length=64, choices=PossibleTypes)
+    type = models.CharField(max_length=128)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    stamp = models.ForeignKey(Stamp, on_delete=models.CASCADE)
 
     objects = ActivityManager()

@@ -7,13 +7,13 @@ from api.models.event import Event
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, name, username, password):
-        user = self.model(name=name, username=username)
+    def create_user(self, name, username, password, email):
+        user = self.model(name=name, username=username, email=email)
         user.set_password(password)
         user.save()
 
-    def create_superuser(self, name, username, password):
-        user = self.model(name=name, username=username)
+    def create_superuser(self, name, username, password, email):
+        user = self.model(name=name, username=username, email=email)
         user.set_password(password)
         user.is_staff()
         user.is_superuser = True
@@ -21,10 +21,17 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    class Roles(models.TextChoices):
+        ADMIN = "admin"
+        VOLUNTEER = "voluntario"
+        PRESENTER = "apresentador"
+        COMMON = "comum"
+
     name = models.CharField(max_length=128)
     username = models.CharField(max_length=128, unique=True)
-    is_admin = models.BooleanField(default=False)
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    email = models.EmailField(unique=True)
+    role = models.CharField(max_length=64, choices=Roles.choices, default=Roles.COMMON)
+    events = models.ManyToManyField(Event, blank=True)
     activities = models.ManyToManyField(Activity, blank=True)
     awards = models.ManyToManyField(Award, blank=True)
 
