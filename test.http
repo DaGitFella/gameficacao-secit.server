@@ -1,0 +1,24 @@
+### POST to pythonanywhere
+POST https://isaquedantas.pythonanywhere.com/api/users
+Content-Type: application/json
+
+{
+  "name": "Common User",
+  "email": "common-user@email.com",
+  "password": "pass",
+  "username": "common-user"
+}
+
+### LOGIN with JWT
+POST https://isaquedantas.pythonanywhere.com/api/token
+Content-Type: application/json
+
+{
+  "username": "common-user",
+  "password": "pass"
+}
+
+### GET user data
+GET https://isaquedantas.pythonanywhere.com/api/users
+Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcyNTA0NDczNSwiaWF0IjoxNzI0OTU4MzM1LCJqdGkiOiIzMmMxYWE4ZmI2NmE0MTBjYTk5MzU4NDcyN2YzMWQxZiIsInVzZXJfaWQiOjF9.j5Mn2Xu2Rn5K62c70FMD69QNS6ZsMUHk1RNIiv8pjBU"
+

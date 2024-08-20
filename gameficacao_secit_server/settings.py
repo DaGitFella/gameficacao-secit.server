@@ -80,6 +80,7 @@ REST_FRAMEWORK = {
     )
 }
 
+ADMIN_EMAIL = 'matemates.api.admin@gmail.com'
 AUTH_USER_MODEL = 'api.User'
 
 # Database
