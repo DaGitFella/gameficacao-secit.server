@@ -19,6 +19,13 @@ class UserTestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_login__on_happy_path__should_return_AUTHORIZED(self):
+    def test_login__on_happy_path__should_return_OK(self):
         self.environment_manager.set_database_environment({"common-user": True})
+
+        print(self.environment_manager.get_user_login_data("common-user"))
+
         response = self.client.post(f"{BASE_URL}/token", self.environment_manager.get_user_login_data("common-user"))
+
+        print(response.data)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

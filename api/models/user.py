@@ -12,12 +12,16 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save()
 
-    def create_superuser(self, name, username, password, email):
-        user = self.model(name=name, username=username, email=email)
+        return user
+
+    def create_superuser(self, username, password):
+        user = self.model(username=username)
         user.set_password(password)
-        user.is_staff()
+        user.role = User.Roles.ADMIN
         user.is_superuser = True
         user.save()
+
+        return user
 
 
 class User(AbstractBaseUser):
