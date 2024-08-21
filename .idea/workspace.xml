@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ada608f-2941-4f70-90ba-114eb5d0834f" name="Changes" comment="start models">
+    <list default="true" id="2ada608f-2941-4f70-90ba-114eb5d0834f" name="Changes" comment="update models and testing">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/activity.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/activity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/award.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/award.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/conquest.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/conquest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/stamp.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/stamp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/user_makes_activity.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/tests/event_environment_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/tests/event_environment_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tests/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/tests/test_user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gameficacao_secit_server/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/gameficacao_secit_server/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,18 +26,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "isaque-dantas"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;isaque-dantas&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/DaGitFella/gameficacao-secit.server.git",
-    "accountId": "ba9ea831-1d70-4b56-8787-fedc858cd787"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/DaGitFella/gameficacao-secit.server.git&quot;,
+    &quot;accountId&quot;: &quot;ba9ea831-1d70-4b56-8787-fedc858cd787&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -53,8 +50,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/isaque/PycharmProjects/gameficacao_secit_server",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "feature--login-user",
+    "last_opened_file_path": "/home/isaque/PycharmProjects/matemates.server",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -62,6 +60,11 @@
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
@@ -88,7 +91,11 @@
       <option name="presentableId" value="Default" />
       <updated>1723550302322</updated>
       <workItem from="1723550304623" duration="2865000" />
-      <workItem from="1723665680507" duration="3407000" />
+      <workItem from="1723665680507" duration="3431000" />
+      <workItem from="1723906613744" duration="3473000" />
+      <workItem from="1724154992972" duration="10000" />
+      <workItem from="1724156575730" duration="6718000" />
+      <workItem from="1724184311719" duration="6924000" />
     </task>
     <task id="LOCAL-00001" summary="start models">
       <option name="closed" value="true" />
@@ -98,7 +105,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723584144005</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update models and testing">
+      <option name="closed" value="true" />
+      <created>1723669102297</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1723669102297</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,6 +125,7 @@
     </ignored-roots>
     <MESSAGE value="merge" />
     <MESSAGE value="start models" />
-    <option name="LAST_COMMIT_MESSAGE" value="start models" />
+    <MESSAGE value="update models and testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="update models and testing" />
   </component>
 </project>
