@@ -7,25 +7,34 @@ from gameficacao_secit_server import settings
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ['username', 'email', 'password', 'name']
 
-    def save(self):
-        if self.validated_data['email'] == settings.ADMIN_EMAIL:
+    def create(self, validated_data):
+        if validated_data['email'] == settings.ADMIN_EMAIL:
             self.Meta.model.objects.create_superuser(
-                name=self.validated_data['name'],
-                email=self.validated_data['email'],
-                password=self.validated_data['password'],
-                username=self.validated_data['username']
+                name=validated_data['name'],
+                email=validated_data['email'],
+                password=validated_data['password'],
+                username=validated_data['username']
             )
         else:
             self.Meta.model.objects.create_user(
-                name=self.validated_data['name'],
-                email=self.validated_data['email'],
-                password=self.validated_data['password'],
-                username=self.validated_data['username']
+                name=validated_data['name'],
+                email=validated_data['email'],
+                password=validated_data['password'],
+                username=validated_data['username']
             )
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation.pop('password', None)
         return representation
+
+    def update(self, instance: User, validated_data):
+        return self.Meta.model.objects.update(instance, validated_data)
+
+    def delete(self, user: User):
+        self.Meta.model.objects.delete(user)
+
+    def set_role(self, role: str, username: str):
+        self.Meta.model.objects.set_role(role=role, username=username)

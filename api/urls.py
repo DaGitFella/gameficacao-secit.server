@@ -5,6 +5,7 @@ from api.views import user
 
 urlpatterns = [
     path('users', user.UserView.as_view()),
+    path('users/set_role', user.set_role),
     path('token', TokenObtainPairView.as_view()),
     path('token/refresh', TokenRefreshView.as_view()),
 ]
