@@ -6,12 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="2ada608f-2941-4f70-90ba-114eb5d0834f" name="Changes" comment="update models and testing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/serializers/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/tests/test_user.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/tests/test_user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/tests/user_environment_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/tests/user_environment_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/user_retrieves_award.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tests/event_environment_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/tests/event_environment_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tests/test_event.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/tests/test_event.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/views/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/views/event.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views/event.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +52,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "feature--login-user",
+    "git-widget-placeholder": "develop",
     "last_opened_file_path": "/home/isaque/PycharmProjects/gameficacao_secit_server",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -99,7 +98,8 @@
       <workItem from="1724156575730" duration="6718000" />
       <workItem from="1724184311719" duration="7092000" />
       <workItem from="1724269459490" duration="1821000" />
-      <workItem from="1724325908848" duration="9656000" />
+      <workItem from="1724325908848" duration="9804000" />
+      <workItem from="1724343351415" duration="2239000" />
     </task>
     <task id="LOCAL-00001" summary="start models">
       <option name="closed" value="true" />
@@ -125,7 +125,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724203533235</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="update models and testing">
+      <option name="closed" value="true" />
+      <created>1724337633162</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1724337633162</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
