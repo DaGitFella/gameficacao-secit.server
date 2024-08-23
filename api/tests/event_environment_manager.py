@@ -1,3 +1,4 @@
+import api.models
 from api.models.event import Event
 from api.tests.user_environment_manager import UserEnvironmentManager
 
@@ -42,10 +43,10 @@ class EventEnvironmentManager:
 
     def set_database_environment(self, environment: dict[str, bool]):
         self.user_env_manager.set_database_environment({"admin-user": True})
-        self.
+        user = self.user_env_manager.retrieve_user("admin-user")
 
         actions = {
-            True: lambda e: self.create(e),
+            True: lambda e: self.create(e, user),
             False: lambda e: self.delete(e),
         }
 
@@ -60,12 +61,12 @@ class EventEnvironmentManager:
     def exists(event_id: int | None) -> bool:
         return event_id and Event.objects.filter(id=event_id).exists()
 
-    def create(self, key: str):
+    def create(self, key: str, user: api.models.User):
         data = self.events_data[key]
         if self.exists(data["id"]):
             return None
 
-        event = Event.objects.create(data)
+        event = Event.objects.create(**data, user=user)
         self.events_data[key]["id"] = event.id
 
     def delete(self, key: str):

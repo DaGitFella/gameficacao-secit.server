@@ -5,7 +5,7 @@ from api.models.event import Event
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = '__all__'
+        fields = ['number', 'year', 'edition_number']
 
     def create(self, validated_data):
         raise NotImplementedError()
@@ -15,3 +15,6 @@ class EventSerializer(serializers.ModelSerializer):
 
     def delete(self, validated_data):
         raise NotImplementedError()
+
+    def get_all_from(self, user, should_get_created_events: bool):
+        return self.Meta.model.objects.get_all_from(user, should_get_created_events)
