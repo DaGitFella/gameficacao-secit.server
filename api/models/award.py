@@ -8,7 +8,10 @@ from api.models.event import Event
 
 class AwardManager(models.Manager):
     def create(self, **kwargs):
-        pass
+        award = self.model(**kwargs)
+        award.available_quantity = award.max_quantity
+        award.save()
+        return award
 
     def update(self, **kwargs):
         pass
@@ -22,8 +25,11 @@ class Award(models.Model):
     required_conquests = models.IntegerField()
     max_quantity = models.IntegerField()
     available_quantity = models.IntegerField()
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='awards')
     conquests = models.ManyToManyField(Conquest, blank=True)
     users = models.ManyToManyField(User, blank=True)
 
     objects = AwardManager()
+
+    def __str__(self):
+        return self.description

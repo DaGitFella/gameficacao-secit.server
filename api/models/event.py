@@ -7,7 +7,17 @@ class EventManager(models.Manager):
     def create(self, **kwargs):
         event = self.model(name=kwargs['name'], year=kwargs['year'], edition_number=kwargs['edition_number'])
         event.user_who_created = kwargs['user']
+
         event.save()
+
+        return event
+
+    @staticmethod
+    def set_related_entities(event, related_entities):
+        event.activity_set = related_entities['activities']
+        event.conquest_set = related_entities['conquests']
+        event.stamp_set = related_entities['stamps']
+        event.award_set = related_entities['awards']
 
         return event
 
