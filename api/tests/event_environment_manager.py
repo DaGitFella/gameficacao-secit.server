@@ -2,6 +2,7 @@ import api.models
 from api.models.event import Event
 from api.serializers.event import EventSerializer
 from api.tests.user_environment_manager import UserEnvironmentManager
+import json
 
 class EventEnvironmentManager:
     user_env_manager = UserEnvironmentManager()
@@ -51,6 +52,12 @@ class EventEnvironmentManager:
                 {"description": "bottom azul", "required_conquests": 3, "max_quantity": 150},
                 {"description": "copo e selo gamer", "required_conquests": 4, "max_quantity": 150},
             ],
+            "activities": [
+                {"type": "palestra", "stamps_amount": 1, "stamp": {"icon": "s1.png"}},
+                {"type": "roda de conversa", "stamps_amount": 1, "stamp": {"icon": "s1.png"}},
+                {"type": "mesa redonda", "stamps_amount": 1, "stamp": {"icon": "s1.png"}},
+                {"type": "apresentação", "stamps_amount": 1, "stamp": {"icon": "s2.png"}},
+            ]
         },
     }
 
@@ -85,10 +92,17 @@ class EventEnvironmentManager:
         if self.exists(data["id"]):
             return None
 
+        print(f'--- {key} ---')
+        json_data = json.dumps(data, indent=4)
+        print(json_data)
+        print()
+
         data['user'] = user
+        data_copy = data.copy()
+        data_copy.pop("id")
 
         serializer = EventSerializer(data=data)
-        serializer.is_valid(raise_exception=True)
+        serializer.is_valid()
         event = serializer.create(serializer.validated_data)
         self.events_data[key]["id"] = event.id
 

@@ -35,6 +35,7 @@ class EventTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_get__participated_events_on_happy_path__should_return_OK(self):
+        # print(self.event_manager.get_data("secit-202"))
         self.event_manager.set_database_environment({"secit-2024": True, "sipex-2024": True})
         self.user_manager.set_database_environment({"common-user": True})
 
