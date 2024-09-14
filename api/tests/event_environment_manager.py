@@ -93,15 +93,16 @@ class EventEnvironmentManager:
             return None
 
         print(f'--- {key} ---')
+        print(data)
         json_data = json.dumps(data, indent=4)
         print(json_data)
         print()
 
-        data['user'] = user
+        data['user_who_created'] = user
         data_copy = data.copy()
         data_copy.pop("id")
 
-        serializer = EventSerializer(data=data)
+        serializer = EventSerializer(data=data_copy)
         serializer.is_valid()
         event = serializer.create(serializer.validated_data)
         self.events_data[key]["id"] = event.id

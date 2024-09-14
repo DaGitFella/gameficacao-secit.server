@@ -6,7 +6,7 @@ from api.models import User
 class EventManager(models.Manager):
     def create(self, **kwargs):
         event = self.model(name=kwargs['name'], year=kwargs['year'], edition_number=kwargs['edition_number'])
-        event.user_who_created = kwargs['user']
+        event.user_who_created = kwargs['user_who_created']
 
         event.save()
 
