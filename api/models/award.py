@@ -26,7 +26,6 @@ class Award(models.Model):
     max_quantity = models.IntegerField()
     available_quantity = models.IntegerField()
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='awards')
-    conquests = models.ManyToManyField(Conquest, blank=True)
     users = models.ManyToManyField(User, blank=True)
 
     objects = AwardManager()

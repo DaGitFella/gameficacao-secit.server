@@ -4,13 +4,10 @@ from api.models import User
 
 
 class EventManager(models.Manager):
-    def create(self, **kwargs):
-        event = self.model(name=kwargs['name'], year=kwargs['year'], edition_number=kwargs['edition_number'])
-        event.user_who_created = kwargs['user_who_created']
-
-        event.save()
-
-        return event
+    @staticmethod
+    def create(instance):
+        instance.save()
+        return instance
 
     @staticmethod
     def set_related_entities(event, related_entities):
@@ -39,7 +36,6 @@ class EventManager(models.Manager):
             return user.events_created.all()
         else:
             return user.events_participating.all()
-
 
 
 class Event(models.Model):

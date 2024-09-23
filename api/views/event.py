@@ -3,6 +3,8 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import api.models
+from api.models.event import EventManager
+from api.models.user import UserManager
 from api.serializers.event import EventSerializer
 from api.serializers.user import UserSerializer
 import json
@@ -21,24 +23,28 @@ class EventView(APIView):
 
         serializer = EventSerializer(data=data)
 
-        json_data = json.dumps(serializer.initial_data, indent=4)
-        print()
-        print(json_data)
-        print()
-
         if not serializer.is_valid():
             print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        copy_data = serializer.validated_data.copy()
-        copy_data.pop("user_who_created")
-        json_data = json.dumps(copy_data, indent=4)
-        print()
-        print(json_data)
-        print(f'\'number\' in data: {"number" in copy_data}')
-        print()
+        EventManager.create()
 
-        serializer.create(serializer.validated_data)
+        # json_data = json.dumps(request.data, indent=4)
+        # print()
+        # print(json_data)
+        # print()
+        #
+        # print(type(request.data["conquests"]))
+
+        # copy_data = serializer.data.copy()
+        # copy_data.pop("user_who_created")
+        # json_data = json.dumps(copy_data, indent=4)
+        # print()
+        # print(json_data)
+        # print(f'\'number\' in data: {"number" in copy_data}')
+        # print()
+
+        # serializer.create(serializer.data)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 

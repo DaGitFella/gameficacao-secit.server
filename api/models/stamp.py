@@ -20,7 +20,7 @@ class StampManager(models.Manager):
 class Stamp(models.Model):
     icon = models.CharField(max_length=128)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='stamps')
-    conquest = models.ForeignKey(Conquest, on_delete=models.CASCADE)
+    conquest = models.ForeignKey(Conquest, on_delete=models.CASCADE, related_name='stamps')
 
     objects = StampManager()
 

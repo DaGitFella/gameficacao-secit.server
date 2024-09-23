@@ -1,3 +1,4 @@
+from django.template.context_processors import static
 from rest_framework import serializers
 
 from api.models.stamp import Stamp
@@ -5,16 +6,27 @@ from api.models.stamp import Stamp
 class StampSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stamp
-        fields = ['number', 'year', 'edition_number']
+        fields = ['icon', 'event', 'conquest']
 
-    # def create_from_list(self, validated_data):
-    #     stamps = []
-    #     for conquest in validated_data['conquests']:
-    #         for stamp in conquest['stamps']:
-    #             stamp.update({"event": validated_data['event']})
-    #             stamps.append(self.create(stamp))
-    #
-    #     return stamps
+    @staticmethod
+    def create_serializers_from_lists(conquests, conquests_serializers):
+        stamps_serializers = []
+        for conquest, serializer in zip(conquests, conquests_serializers):
+            for stamp in conquest['stamps']:
+                stamp['conquest'] = serializer
+                stamps_serializers.append(StampSerializer(data=stamp))
+
+        return stamps_serializers
+
+    @staticmethod
+    def get_data_from_lists(conquests, conquests_serializers):
+        stamps = []
+        for conquest, serializer in zip(conquests, conquests_serializers):
+            for stamp in conquest['stamps']:
+                stamp['conquest'] = serializer
+                stamps.append(stamp)
+
+        return stamps
 
     def create(self, validated_data):
         return Stamp.objects.create(**validated_data)

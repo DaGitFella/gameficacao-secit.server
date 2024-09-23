@@ -15,7 +15,7 @@ class EventTestCase(APITestCase):
     def test_post__on_happy_path__should_return_CREATED(self):
         self.event_manager.set_database_environment({"secit-2024": False})
 
-        response = self.client.post(f"{BASE_URL}/events", self.event_manager.get_data("secit-2024"), headers=self.user_manager.get_credentials("admin-user"))
+        response = self.client.post(f"{BASE_URL}/events", self.event_manager.get_data("secit-2024"), headers=self.user_manager.get_credentials("admin-user"), format="json")
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data, self.event_manager.retrieve("secit-2024"))
