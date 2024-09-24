@@ -1,5 +1,4 @@
 from api.models import Event
-from api.serializers.event import EventSerializer
 from api.services.activity import ActivityService
 from api.services.award import AwardService
 from api.services.conquest import ConquestService
@@ -7,7 +6,7 @@ from api.services.conquest import ConquestService
 
 class EventService:
     @staticmethod
-    def create(serializer: EventSerializer):
+    def create(serializer):
         event_data = serializer.data
         event = Event(
             name=serializer.data.name,
@@ -21,3 +20,15 @@ class EventService:
         event.activities = ActivityService.create_from_serializer_list(event_data.activities)
 
         return event
+
+    @staticmethod
+    def raise_if_invalid_conquests(conquests_data):
+        raise NotImplementedError()
+
+    @staticmethod
+    def raise_if_invalid_awards(awards_data):
+        raise NotImplementedError()
+
+    @staticmethod
+    def raise_if_invalid_activities(activities_data):
+        raise NotImplementedError()

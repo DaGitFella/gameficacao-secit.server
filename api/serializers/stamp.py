@@ -6,7 +6,7 @@ from api.models.stamp import Stamp
 class StampSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stamp
-        fields = ['icon', 'event', 'conquest']
+        fields = ['icon', 'conquest']
 
     @staticmethod
     def create_serializers_from_lists(conquests, conquests_serializers):
@@ -29,7 +29,7 @@ class StampSerializer(serializers.ModelSerializer):
         return stamps
 
     def create(self, validated_data):
-        return Stamp.objects.create(**validated_data)
+        return Stamp.objects.save_in_db(**validated_data)
 
     def update(self, instance, validated_data):
         raise NotImplementedError()

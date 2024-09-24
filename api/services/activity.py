@@ -1,11 +1,10 @@
 from api.models.activity import Activity
-from api.serializers.activity import ActivitySerializer
 from api.services.stamp import StampService
 
 
 class ActivityService:
     @staticmethod
-    def create_from_serializer_list(serializer: ActivitySerializer):
+    def create_from_serializer_list(serializer):
         data = serializer.data
         return list(map(ActivityService.create, data))
 

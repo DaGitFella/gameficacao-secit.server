@@ -17,7 +17,7 @@ class AwardSerializer(serializers.ModelSerializer):
         return {'awards': awards}
 
     def create(self, validated_data):
-        return self.Meta.model.objects.create(**validated_data)
+        return self.Meta.model.objects.save_in_db(**validated_data)
 
     def update(self, instance, validated_data):
         raise NotImplementedError()

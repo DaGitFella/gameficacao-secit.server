@@ -1,11 +1,10 @@
 from api.models.conquest import Conquest
-from api.serializers.conquest import ConquestSerializer
 from api.services.stamp import StampService
 
 
 class ConquestService:
     @staticmethod
-    def create_from_serializer_list(serializer: ConquestSerializer):
+    def create_from_serializer_list(serializer):
         data = serializer.data
         return list(map(ConquestService.create, data))
 

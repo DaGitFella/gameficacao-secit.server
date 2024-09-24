@@ -1,14 +1,13 @@
 from api.models.award import Award
-from api.serializers.award import AwardSerializer
 
 
 class AwardService:
     @staticmethod
-    def create_from_serializer_list(serializer: AwardSerializer):
+    def create_from_serializer_list(serializer):
         return list(map(AwardService.create, serializer.data))
 
     @staticmethod
-    def create_from_serializer(serializer: AwardSerializer):
+    def create_from_serializer(serializer):
         return AwardService.create(serializer.data)
 
     @staticmethod

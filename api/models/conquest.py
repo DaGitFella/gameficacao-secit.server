@@ -1,19 +1,7 @@
 from django.db import models
 
+from api.managers.conquest import ConquestManager
 from api.models.event import Event
-
-
-class ConquestManager(models.Manager):
-    def create(self, **kwargs):
-        conquest = self.model(**kwargs)
-        conquest.save()
-        return conquest
-
-    def update(self, **kwargs):
-        pass
-
-    def delete(self, **kwargs):
-        pass
 
 
 class Conquest(models.Model):

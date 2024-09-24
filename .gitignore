@@ -3,3 +3,4 @@
 **/migrations
 test.http
 .idea
+**/lazy.py

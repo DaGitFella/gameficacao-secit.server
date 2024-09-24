@@ -9,6 +9,9 @@ from api.serializers.event import EventSerializer
 from api.serializers.user import UserSerializer
 import json
 
+from api.services.event import EventService
+
+
 class EventView(APIView):
     @staticmethod
     def post(request):
@@ -27,7 +30,8 @@ class EventView(APIView):
             print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        EventManager.create()
+        event = EventService.create(serializer)
+        EventManager.save_in_db(event)
 
         # json_data = json.dumps(request.data, indent=4)
         # print()
