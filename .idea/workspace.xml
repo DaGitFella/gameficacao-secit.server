@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ada608f-2941-4f70-90ba-114eb5d0834f" name="Changes" comment="start refactor of clean architecture">
-      <change afterPath="$PROJECT_DIR$/api/managers/lazy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="2ada608f-2941-4f70-90ba-114eb5d0834f" name="Changes" comment="continue refactor of clean architecture">
+      <change afterPath="$PROJECT_DIR$/api/serializers/custom_list_serializer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/services/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/activity.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/activity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/award.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/award.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/conquest.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/conquest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/event.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/event.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/stamp.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/stamp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/serializers/activity.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers/activity.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/serializers/award.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers/award.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/serializers/conquest.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers/conquest.py" afterDir="false" />
@@ -54,6 +48,11 @@
     &quot;accountId&quot;: &quot;ba9ea831-1d70-4b56-8787-fedc858cd787&quot;
   }
 }</component>
+  <component name="JsbtTreeLayoutManager">
+    <layout place="tools.popupGrunt">
+      <scroll-view-position x="0" y="0" />
+    </layout>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -74,7 +73,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/isaque/PycharmProjects/gameficacao_secit_server/api/serializers&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/isaque/PycharmProjects/leetCode&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -201,7 +200,11 @@
       <workItem from="1726940010491" duration="3125000" />
       <workItem from="1727098472954" duration="7112000" />
       <workItem from="1727185434299" duration="3217000" />
-      <workItem from="1727190056021" duration="1871000" />
+      <workItem from="1727190056021" duration="1983000" />
+      <workItem from="1727272697642" duration="17000" />
+      <workItem from="1727274382445" duration="4118000" />
+      <workItem from="1727299755531" duration="392000" />
+      <workItem from="1727346605782" duration="10589000" />
     </task>
     <task id="LOCAL-00001" summary="start models">
       <option name="closed" value="true" />
@@ -291,7 +294,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727105353531</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="continue refactor of clean architecture">
+      <option name="closed" value="true" />
+      <created>1727192026297</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1727192026297</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,7 +321,8 @@
     <MESSAGE value="update gitignore" />
     <MESSAGE value="update" />
     <MESSAGE value="start refactor of clean architecture" />
-    <option name="LAST_COMMIT_MESSAGE" value="start refactor of clean architecture" />
+    <MESSAGE value="continue refactor of clean architecture" />
+    <option name="LAST_COMMIT_MESSAGE" value="continue refactor of clean architecture" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gameficacao_secit_server$stamp.coverage" NAME="stamp Coverage Results" MODIFIED="1724868123154" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api/serializers" />

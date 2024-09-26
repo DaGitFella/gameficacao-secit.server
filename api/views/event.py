@@ -30,26 +30,7 @@ class EventView(APIView):
             print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        event = EventService.create(serializer)
-        EventManager.save_in_db(event)
-
-        # json_data = json.dumps(request.data, indent=4)
-        # print()
-        # print(json_data)
-        # print()
-        #
-        # print(type(request.data["conquests"]))
-
-        # copy_data = serializer.data.copy()
-        # copy_data.pop("user_who_created")
-        # json_data = json.dumps(copy_data, indent=4)
-        # print()
-        # print(json_data)
-        # print(f'\'number\' in data: {"number" in copy_data}')
-        # print()
-
-        # serializer.create(serializer.data)
-
+        EventService.create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     @staticmethod

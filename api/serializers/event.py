@@ -4,7 +4,9 @@ from api.models import User
 from api.models.event import Event
 from api.serializers.award import AwardSerializer
 from api.serializers.conquest import ConquestSerializer
+from api.serializers.user import UserSerializer
 from api.services.event import EventService
+from api.services.user import UserService
 
 
 class EventSerializer(serializers.ModelSerializer):
@@ -13,13 +15,16 @@ class EventSerializer(serializers.ModelSerializer):
         fields = ['user_who_created', 'name', 'year', 'edition_number', 'conquests', 'awards', 'activities']
 
     conquests = ConquestSerializer(many=True)
+    awards = AwardSerializer(many=True)
+    activities = ConquestSerializer(many=True)
+    user_who_created = UserSerializer()
 
     def to_internal_value(self, data):
         return {
             "name": data["name"],
             "year": data["year"],
             "edition_number": data["edition_number"],
-            "user_who_created": User.objects.get(id=int(data["user_who_created"])),
+            "user_who_created": UserService.get_from_pk(data["user_who_created"]),
             "conquests": ConquestSerializer(many=True, data=data["conquests"]),
             "awards": AwardSerializer(many=True, data=data["awards"]),
             "activities": AwardSerializer(many=True, data=data["activities"])
@@ -50,12 +55,18 @@ class EventSerializer(serializers.ModelSerializer):
         return activities_data
 
     def to_representation(self, instance):
-        instance['conquests'] = [instance['conquests']]
-        instance['awards'] = [instance['awards']]
-        instance['activities'] = [instance['activities']]
+        # instance['conquests'] = [instance['conquests']]
+        # instance['awards'] = [instance['awards']]
+        # instance['activities'] = [instance['activities']]
+
+        # print(instance['conquests'])
 
         representation = super().to_representation(instance)
-        representation.pop("user_who_created")
-        representation["conquests"] = list(map(lambda c: c.data, representation["conquests"]))
+        # representation["user_who_created"] = UserSerializer(representation["user_who_created"])
+
+        representation["user_who_created"] = instance['user_who_created']
+        # print(instance['user_who_created'])
+
+        # representation["conquests"] = list(map(lambda c: c.data, representation["conquests"]))
 
         return representation

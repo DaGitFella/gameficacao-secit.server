@@ -2,11 +2,14 @@ from django.template.context_processors import static
 from rest_framework import serializers
 
 from api.models.stamp import Stamp
+from api.serializers.custom_list_serializer import CustomListSerializer
+
 
 class StampSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stamp
-        fields = ['icon', 'conquest']
+        fields = ['icon']
+        list_serializer_class = CustomListSerializer
 
     @staticmethod
     def create_serializers_from_lists(conquests, conquests_serializers):
@@ -37,5 +40,7 @@ class StampSerializer(serializers.ModelSerializer):
     def delete(self, validated_data):
         raise NotImplementedError()
 
-    def get_all_from(self, user, should_get_created_events: bool):
-        return self.Meta.model.objects.get_all_from(user, should_get_created_events)
+    # def to_representation(self, instance):
+    #     representation = super().to_representation(instance)
+    #     representation.pop('conquest')
+    #     return representation

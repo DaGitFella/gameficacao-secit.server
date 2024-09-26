@@ -1,23 +1,32 @@
+from api.managers.activity import ActivityManager
+from api.managers.award import AwardManager
+from api.managers.conquest import ConquestManager
+from api.managers.event import EventManager
+from api.managers.stamp import StampManager
 from api.models import Event
 from api.services.activity import ActivityService
 from api.services.award import AwardService
 from api.services.conquest import ConquestService
+from api.services.stamp import StampService
 
 
 class EventService:
     @staticmethod
     def create(serializer):
-        event_data = serializer.data
+        data = serializer.data
         event = Event(
-            name=serializer.data.name,
-            year=serializer.data.year,
-            edition_number=serializer.data.edition_number
+            name=data['name'],
+            year=data['year'],
+            edition_number=data['edition_number'],
+            user_who_created=data['user_who_created'],
         )
-        event.user_who_created = event_data.user_who_created
 
-        event.conquests = ConquestService.create_from_serializer_list(event_data.conquests)
-        event.awards = AwardService.create_from_serializer_list(event_data.awards)
-        event.activities = ActivityService.create_from_serializer_list(event_data.activities)
+        event.save()
+
+        StampService.create_from_event_data(data)
+        ConquestService.create_from_data_list(event, data['conquests']),
+        AwardService.create_from_data_list(event, data['awards']),
+        ActivityService.create_from_data_list(event, data['activities'])
 
         return event
 
