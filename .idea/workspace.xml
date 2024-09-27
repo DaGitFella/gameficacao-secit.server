@@ -4,20 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ada608f-2941-4f70-90ba-114eb5d0834f" name="Changes" comment="continue refactor of clean architecture">
-      <change afterPath="$PROJECT_DIR$/api/serializers/custom_list_serializer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/services/user.py" afterDir="false" />
+    <list default="true" id="2ada608f-2941-4f70-90ba-114eb5d0834f" name="Changes" comment="adskjda">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/managers/activity.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/managers/activity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/managers/award.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/managers/award.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/managers/conquest.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/managers/conquest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/managers/stamp.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/managers/stamp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/conquest.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/conquest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/event.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/event.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/stamp.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/stamp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/serializers/activity.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers/activity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/serializers/award.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers/award.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/serializers/conquest.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers/conquest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/serializers/custom_list_serializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers/custom_list_serializer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/serializers/event.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers/event.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/serializers/stamp.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers/stamp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/serializers/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/services/activity.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/services/activity.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/services/award.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/services/award.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/services/conquest.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/services/conquest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/services/event.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/services/event.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/services/stamp.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/services/stamp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/services/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/services/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tests/event_environment_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/tests/event_environment_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tests/test_event.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/tests/test_event.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/views/event.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views/event.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -204,7 +211,9 @@
       <workItem from="1727272697642" duration="17000" />
       <workItem from="1727274382445" duration="4118000" />
       <workItem from="1727299755531" duration="392000" />
-      <workItem from="1727346605782" duration="10589000" />
+      <workItem from="1727346605782" duration="10615000" />
+      <workItem from="1727376402730" duration="51000" />
+      <workItem from="1727376641052" duration="15746000" />
     </task>
     <task id="LOCAL-00001" summary="start models">
       <option name="closed" value="true" />
@@ -302,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727192026297</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="adskjda">
+      <option name="closed" value="true" />
+      <created>1727364778302</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1727364778302</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -322,7 +339,8 @@
     <MESSAGE value="update" />
     <MESSAGE value="start refactor of clean architecture" />
     <MESSAGE value="continue refactor of clean architecture" />
-    <option name="LAST_COMMIT_MESSAGE" value="continue refactor of clean architecture" />
+    <MESSAGE value="adskjda" />
+    <option name="LAST_COMMIT_MESSAGE" value="adskjda" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gameficacao_secit_server$stamp.coverage" NAME="stamp Coverage Results" MODIFIED="1724868123154" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/api/serializers" />

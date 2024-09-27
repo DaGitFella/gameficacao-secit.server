@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from api.models import User
 from api.models.event import Event
+from api.serializers.activity import ActivitySerializer
 from api.serializers.award import AwardSerializer
 from api.serializers.conquest import ConquestSerializer
 from api.serializers.user import UserSerializer
@@ -12,11 +13,11 @@ from api.services.user import UserService
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ['user_who_created', 'name', 'year', 'edition_number', 'conquests', 'awards', 'activities']
+        fields = ['id', 'user_who_created', 'name', 'year', 'edition_number', 'conquests', 'awards', 'activities']
 
     conquests = ConquestSerializer(many=True)
     awards = AwardSerializer(many=True)
-    activities = ConquestSerializer(many=True)
+    activities = ActivitySerializer(many=True)
     user_who_created = UserSerializer()
 
     def to_internal_value(self, data):
@@ -27,7 +28,7 @@ class EventSerializer(serializers.ModelSerializer):
             "user_who_created": UserService.get_from_pk(data["user_who_created"]),
             "conquests": ConquestSerializer(many=True, data=data["conquests"]),
             "awards": AwardSerializer(many=True, data=data["awards"]),
-            "activities": AwardSerializer(many=True, data=data["activities"])
+            "activities": ActivitySerializer(many=True, data=data["activities"])
         }
 
     def update(self, instance, validated_data):
@@ -55,18 +56,33 @@ class EventSerializer(serializers.ModelSerializer):
         return activities_data
 
     def to_representation(self, instance):
-        # instance['conquests'] = [instance['conquests']]
-        # instance['awards'] = [instance['awards']]
-        # instance['activities'] = [instance['activities']]
+        # instance.conquests = [instance.conquests]
+        # instance.awards = [instance.awards]
+        # instance.activities = [instance.activities]
 
-        # print(instance['conquests'])
+        # print(instance.conquests)
 
         representation = super().to_representation(instance)
+
+        print('\n--- representation in EventSerializer.to_representation ---')
+        print(representation)
+
         # representation["user_who_created"] = UserSerializer(representation["user_who_created"])
 
-        representation["user_who_created"] = instance['user_who_created']
-        # print(instance['user_who_created'])
+        representation["user_who_created"] = UserSerializer(instance.user_who_created).data
 
+        # print('\n--- instance.awards in EventSerializer.to_representation ---')
+        # print(instance.awards)
+        #
+        # print('\n--- instance.activities in EventSerializer.to_representation ---')
+        # print(instance.activities)
+        #
+        # print('\n--- instance.conquests in EventSerializer.to_representation ---')
+        # print(instance.conquests)
+        #
+        # print()
+
+        # print(instance.user_who_created)
         # representation["conquests"] = list(map(lambda c: c.data, representation["conquests"]))
 
         return representation

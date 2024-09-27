@@ -24,13 +24,21 @@ class EventView(APIView):
         data = request.data.copy()
         data.update({"user_who_created": request.user.id})
 
+        # print('--- Incoming data in EventView ---')
+        # print(data)
+
         serializer = EventSerializer(data=data)
 
         if not serializer.is_valid():
             print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        EventService.create(serializer)
+        event = EventService.create(serializer)
+        serializer = EventSerializer(event)
+        print('--- Created Event in EventView ---')
+        print(event)
+        print()
+        # print(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     @staticmethod

@@ -11,4 +11,4 @@ class Stamp(models.Model):
     objects = StampManager()
 
     def __str__(self):
-        return self.icon
+        return f'{self.icon} | {self.id}'

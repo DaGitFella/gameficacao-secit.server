@@ -8,7 +8,7 @@ from api.serializers.stamp import StampSerializer
 class ActivitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Activity
-        fields = ['stamps_amount', 'timestamp', 'type', 'stamp']
+        fields = ['stamps_amount', 'type', 'stamp']
         list_serializer_class = CustomListSerializer
 
     stamp = StampSerializer()

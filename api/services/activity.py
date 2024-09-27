@@ -5,17 +5,16 @@ from api.services.stamp import StampService
 
 class ActivityService:
     @staticmethod
-    def create_from_data_list(event, data):
-        return Activity.objects.save(list(map(lambda d: ActivityService.create(event, d), data)))
+    def create_from_data_list(event, data_list):
+        return Activity.objects.save(list(map(lambda data: ActivityService.create(event, data), data_list)))
 
     @staticmethod
     def create(event, data):
         activity = Activity(
             stamps_amount=data['stamps_amount'],
-            timestamp=data['timestamp'],
             type=data['type'],
             event=event,
-            stamp=StampService.create_from_serializer(data['stamp'])
+            stamp=data['stamp']
         )
 
         return activity

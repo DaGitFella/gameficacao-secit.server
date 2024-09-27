@@ -3,7 +3,7 @@ from api.models.award import Award
 
 class AwardService:
     @staticmethod
-    def create_from_data_list(event, data):
+    def create_from_serializer(event, data):
         return Award.objects.save(list(map(lambda d: AwardService.create(event, d), data)))
 
     # @staticmethod

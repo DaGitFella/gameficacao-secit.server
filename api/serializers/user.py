@@ -10,20 +10,17 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['username', 'email', 'password', 'name']
 
     def create(self, validated_data):
+        data = {
+            'name': validated_data['name'],
+            'email': validated_data['email'],
+            'password': validated_data['password'],
+            'username': validated_data['username']
+        }
+
         if validated_data['email'] == settings.ADMIN_EMAIL:
-            self.Meta.model.objects.create_superuser(
-                name=validated_data['name'],
-                email=validated_data['email'],
-                password=validated_data['password'],
-                username=validated_data['username']
-            )
-        else:
-            self.Meta.model.objects.create_user(
-                name=validated_data['name'],
-                email=validated_data['email'],
-                password=validated_data['password'],
-                username=validated_data['username']
-            )
+            return self.Meta.model.objects.create_superuser(**data)
+
+        return self.Meta.model.objects.create_user(**data)
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)

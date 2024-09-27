@@ -1,26 +1,24 @@
 from functools import reduce
 
+from api.models.conquest import Conquest
 from api.models.stamp import Stamp
 
 
 class StampService:
     @staticmethod
-    def create_from_serializer_list(data):
-        return list(map(StampService.create, data))
+    def create_from_data_list(data_list):
+        # return Stamp.objects.save(list(map(lambda d: StampService.create(d['stamp'], d['conquest']), data_list)))
+        return Stamp.objects.save(
+            [StampService.create(data["stamp"], data["conquest"]) for data in data_list]
+        )
 
     @staticmethod
-    def create_from_serializer(serializer):
-        return StampService.create(serializer.data)
+    def create_from_serializer(serializer, conquest: Conquest):
+        return StampService.create(serializer.data, conquest)
 
     @staticmethod
-    def create(data):
-        stamp = Stamp(icon=data['icon'])
-        return stamp
-
-    @staticmethod
-    def create_from_event_data(data: dict):
-        stamps = StampService.get_from_event_data(data)
-        return Stamp.objects.save(stamps)
+    def create(data, conquest: Conquest):
+        return Stamp(icon=data['icon'], conquest=conquest)
 
     @staticmethod
     def get_from_event_data(data: dict):
@@ -28,3 +26,7 @@ class StampService:
             lambda s1, s2: s1 + s2,
             map(lambda c: c['stamps'], data['conquests'])
         )
+
+    @staticmethod
+    def get_by_icon(stamp_icon: str, stamps: list[Stamp]):
+        return next(filter(lambda stamp: stamp.icon == stamp_icon, stamps))

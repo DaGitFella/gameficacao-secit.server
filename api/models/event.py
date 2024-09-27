@@ -12,3 +12,9 @@ class Event(models.Model):
     users_who_participate = models.ManyToManyField(User, related_name='events_participating')
 
     objects = EventManager()
+
+    def __str__(self):
+        return (f'<Event {self.name}>\n'
+                f'\tConquests: {self.conquests}\n'
+                f'\tAwards: {self.awards}\n'
+                f'\tActivities: {self.activities}\n')

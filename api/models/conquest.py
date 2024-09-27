@@ -14,4 +14,4 @@ class Conquest(models.Model):
     objects = ConquestManager()
 
     def __str__(self):
-        return self.name
+        return f'{self.name} | {self.id}'

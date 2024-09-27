@@ -61,9 +61,13 @@ class EventEnvironmentManager:
         },
     }
 
+    def update_data_ids(self, ids: dict[str, int]):
+        for event_name, data_id in ids.items():
+            self.events_data[event_name]["id"] = data_id
+
     def get_data(self, event_name: str):
         data = self.events_data[event_name].copy()
-        data.pop("id")
+        # data.pop("id")
 
         return data
 
@@ -114,3 +118,6 @@ class EventEnvironmentManager:
 
         Event.objects.filter(id=data["id"]).delete()
         self.events_data[key]["id"] = None
+
+    def retrieve_all(self):
+        pass
