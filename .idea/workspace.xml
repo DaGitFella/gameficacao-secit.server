@@ -6,13 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2ada608f-2941-4f70-90ba-114eb5d0834f" name="Changes" comment="start models">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/activity.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/activity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/award.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/award.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/conquest.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/conquest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/stamp.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/stamp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/user_makes_activity.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/tests/event_environment_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/tests/event_environment_manager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,6 +183,22 @@
       <option name="docutils_params" value="" />
       <option name="docutils_task" value="" />
       <option name="docutils_open_in_browser" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Autodetect">
+      <module name="matemates.server" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
   </component>
