@@ -2,8 +2,16 @@ from django.db import models
 
 
 class ConquestManager(models.Manager):
-    def save(self, conquests):
-        return self.bulk_create(conquests)
+    @staticmethod
+    def save(conquests: list):
+        for conquest in conquests:
+            conquest.save()
+            saved_conquests.append(conquest)
+
+        print("--- conquests in ConquestManager ---")
+        print(conquests)
+
+        return conquests
 
     def create(self, **kwargs):
         conquest = self.model(**kwargs)
