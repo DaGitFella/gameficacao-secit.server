@@ -6,7 +6,6 @@ class ConquestManager(models.Manager):
     def save(conquests: list):
         for conquest in conquests:
             conquest.save()
-            saved_conquests.append(conquest)
 
         print("--- conquests in ConquestManager ---")
         print(conquests)

@@ -15,18 +15,43 @@ class EventTestCase(APITestCase):
 
     def test_post__on_happy_path__should_return_CREATED(self):
         self.event_manager.set_database_environment({"secit-2024": False})
+        data = self.event_manager.get_data("secit-2024")
 
-        response = self.client.post(f"{BASE_URL}/events", self.event_manager.get_data("secit-2024"),
+        response = self.client.post(f"{BASE_URL}/events", data,
                                     headers=self.user_manager.get_credentials("admin-user"), format="json")
 
-        self.event_manager.update_data_ids({"secit-2024": True})
+        self.event_manager.update_data_ids({"secit-2024": response.data["id"]})
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+        print("\n" * 4)
         print('--- response.data in EventTestCase test_post__on_happy_path ---')
         print(response.data)
 
-        self.assertEqual(response.data, self.event_manager.retrieve("secit-2024"))
+        print(response.data['user_who_created'])
+        admin_user: dict = self.user_manager.get_user_data("admin-user")
+        admin_user.pop("password")
+
+        self.assertEqual(response.data['name'], data['name'])
+        self.assertEqual(response.data['user_who_created'], admin_user)
+        self.assertEqual(response.data['conquests'], data['conquests'])
+        self.assertEqual(response.data['activities'], data['activities'])
+
+        received_awards = [
+            {
+                "description": award["description"],
+                "required_conquests": award["required_conquests"],
+                "max_quantity": award["max_quantity"],
+            }
+
+            for award in response.data['awards']
+        ]
+
+        print()
+        print(received_awards)
+        print(data['awards'])
+
+        self.assertEqual(received_awards, data['awards'])
 
     def test_get__created_events_on_happy_path__should_return_OK(self):
         self.event_manager.set_database_environment({"secit-2024": True, "sipex-2024": True})

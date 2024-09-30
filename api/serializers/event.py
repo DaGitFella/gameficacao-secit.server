@@ -1,6 +1,5 @@
 from rest_framework import serializers
 
-from api.models import User
 from api.models.event import Event
 from api.serializers.activity import ActivitySerializer
 from api.serializers.award import AwardSerializer
@@ -31,15 +30,6 @@ class EventSerializer(serializers.ModelSerializer):
             "activities": ActivitySerializer(many=True, data=data["activities"])
         }
 
-    def update(self, instance, validated_data):
-        raise NotImplementedError()
-
-    def delete(self, validated_data):
-        raise NotImplementedError()
-
-    def get_all_from(self, user, should_get_created_events: bool):
-        return self.Meta.model.objects.get_all_from(user, should_get_created_events)
-
     @staticmethod
     def validate_conquests(conquests_data):
         EventService.raise_if_invalid_conquests(conquests_data)
@@ -56,33 +46,10 @@ class EventSerializer(serializers.ModelSerializer):
         return activities_data
 
     def to_representation(self, instance):
-        # instance.conquests = [instance.conquests]
-        # instance.awards = [instance.awards]
-        # instance.activities = [instance.activities]
-
-        # print(instance.conquests)
-
         representation = super().to_representation(instance)
 
         print('\n--- representation in EventSerializer.to_representation ---')
         print(representation)
 
-        # representation["user_who_created"] = UserSerializer(representation["user_who_created"])
-
         representation["user_who_created"] = UserSerializer(instance.user_who_created).data
-
-        # print('\n--- instance.awards in EventSerializer.to_representation ---')
-        # print(instance.awards)
-        #
-        # print('\n--- instance.activities in EventSerializer.to_representation ---')
-        # print(instance.activities)
-        #
-        # print('\n--- instance.conquests in EventSerializer.to_representation ---')
-        # print(instance.conquests)
-        #
-        # print()
-
-        # print(instance.user_who_created)
-        # representation["conquests"] = list(map(lambda c: c.data, representation["conquests"]))
-
         return representation

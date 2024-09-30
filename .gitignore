@@ -2,5 +2,5 @@
 **/*.pyc
 **/migrations
 test.http
-.idea
+.idea/**
 **/lazy.py

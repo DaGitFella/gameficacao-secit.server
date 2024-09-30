@@ -10,22 +10,10 @@ class AwardSerializer(serializers.ModelSerializer):
         fields = ['description', 'required_conquests', 'max_quantity', 'available_quantity']
         list_serializer_class = CustomListSerializer
 
-    def create_from_list(self, validated_data):
-        awards = []
-        for award in validated_data['awards']:
-            award.update({"event": validated_data['event']})
-            awards.append(self.create(award))
-
-        return {'awards': awards}
-
-    def create(self, validated_data):
-        return self.Meta.model.objects.save_in_db(**validated_data)
-
-    def update(self, instance, validated_data):
-        raise NotImplementedError()
-
-    def delete(self, validated_data):
-        raise NotImplementedError()
-
-    def get_all_from(self, user, should_get_created_events: bool):
-        return self.Meta.model.objects.get_all_from(user, should_get_created_events)
+    def to_internal_value(self, data):
+        return {
+            "description": data['description'],
+            "required_conquests": data['required_conquests'],
+            "max_quantity": data['max_quantity'],
+            "available_quantity": data['max_quantity'],
+        }

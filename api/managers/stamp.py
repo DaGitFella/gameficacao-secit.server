@@ -4,8 +4,11 @@ from api.models.conquest import Conquest
 
 
 class StampManager(models.Manager):
-    def save(self, stamps: list):
-        return self.bulk_create(stamps)
+    @staticmethod
+    def save(stamps: list):
+        for stamp in stamps:
+            stamp.save()
+        return stamps
 
     def update(self, **kwargs):
         pass

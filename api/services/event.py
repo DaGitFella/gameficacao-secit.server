@@ -1,3 +1,5 @@
+from django.db.models import QuerySet
+
 from api.models import Event
 from api.models.conquest import Conquest
 from api.models.stamp import Stamp
@@ -48,12 +50,15 @@ class EventService:
 
         ActivityService.create_from_data_list(event, event_data['activities'])
 
-        print('\n--- event_data in EventService.create before Awards ---')
-        print(event_data["activities"])
-        print()
+        print('\n--- event_data["awards"] in EventService.create before Awards ---')
         print(event_data["awards"])
         print()
-        AwardService.create_from_serializer(event, event_data['awards']),
+
+        awards = AwardService.create_from_serializer(event, event_data['awards']),
+
+        print('\n--- awards in EventService.create after AwardService ---')
+        print(awards)
+        print()
 
         return event
 
@@ -90,6 +95,11 @@ class EventService:
         print()
 
         return {**event_data, 'activities': activities}
+
+    @staticmethod
+    def get_all_from(user, should_get_created_events: bool):
+        query_set: QuerySet = Event.objects.get_all_from(user, should_get_created_events)
+        return list(query_set.values())
 
     @staticmethod
     def raise_if_invalid_conquests(conquests_data):
