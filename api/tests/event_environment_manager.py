@@ -14,12 +14,11 @@ class EventEnvironmentManager:
             "year": "2024",
             "edition_number": 10,
             "conquests": [
-                {"name": "vimfiquei", "color": "rosa", "required_stamps": 4, "stamps": [{"icon": "s1.png"}], "min_stamp_types_amount": 1},
-                {"name": "apresentador", "color": "azul", "required_stamps": 1, "stamps": [{"icon": "s2.png"}], "min_stamp_types_amount": 1},
-                {"name": "expert", "color": "azul claro", "required_stamps": 1, "stamps": [{"icon": "s3a.png"}, {"icon": "s3b.png"},
-                                                                                           {"icon": "s3c.png"}, {"icon": "s3d.png"}], "min_stamp_types_amount": 3},
-                {"name": "sabido", "color": "amarelo", "required_stamps": 3, "stamps": [{"icon": "s4.png"}], "min_stamp_types_amount": 1},
-                {"name": "curioso", "color": "cinza", "required_stamps": 6, "stamps": [{"icon": "s5a.png"}, {"icon": "s5b.png"}], "min_stamp_types_amount": 2},
+                {"name": "vimfiquei", "color": "1AB43F", "required_stamps": 4, "stamps": [{"icon": "s1.png"}], "min_stamp_types_amount": 1},
+                {"name": "apresentador", "color": "AA5AAF", "required_stamps": 1, "stamps": [{"icon": "s2.png"}], "min_stamp_types_amount": 1},
+                {"name": "expert", "color": "2EAB6F", "required_stamps": 1, "stamps": [{"icon": "s3a.png"}, {"icon": "s3b.png"}, {"icon": "s3c.png"}, {"icon": "s3d.png"}], "min_stamp_types_amount": 3},
+                {"name": "sabido", "color": "4A375B", "required_stamps": 3, "stamps": [{"icon": "s4.png"}], "min_stamp_types_amount": 1},
+                {"name": "curioso", "color": "115C4F", "required_stamps": 6, "stamps": [{"icon": "s5a.png"}, {"icon": "s5b.png"}], "min_stamp_types_amount": 2},
             ],
             "awards": [
                 {"description": "bottom branco", "required_conquests": 2, "max_quantity": 150},

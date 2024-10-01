@@ -7,7 +7,6 @@ from api.models.stamp import Stamp
 class StampService:
     @staticmethod
     def create_from_data_list(data_list):
-        # return Stamp.objects.save(list(map(lambda d: StampService.create(d['stamp'], d['conquest']), data_list)))
         return Stamp.objects.save(
             [StampService.create(data["stamp"], data["conquest"]) for data in data_list]
         )

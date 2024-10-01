@@ -5,6 +5,9 @@ from api.serializers.activity import ActivitySerializer
 from api.serializers.award import AwardSerializer
 from api.serializers.conquest import ConquestSerializer
 from api.serializers.user import UserSerializer
+from api.services.activity import ActivityService
+from api.services.award import AwardService
+from api.services.conquest import ConquestService
 from api.services.event import EventService
 from api.services.user import UserService
 
@@ -30,20 +33,12 @@ class EventSerializer(serializers.ModelSerializer):
             "activities": ActivitySerializer(many=True, data=data["activities"])
         }
 
-    @staticmethod
-    def validate_conquests(conquests_data):
-        EventService.raise_if_invalid_conquests(conquests_data)
-        return conquests_data
+    def validate(self, data):
+        serializers_to_validate = [data["conquests"], data["awards"], data["activities"]]
+        for serializer in serializers_to_validate:
+            serializer.validate(serializer.initial_data)
 
-    @staticmethod
-    def validate_awards(awards_data):
-        EventService.raise_if_invalid_awards(awards_data)
-        return awards_data
-
-    @staticmethod
-    def validate_activities(activities_data):
-        EventService.raise_if_invalid_activities(activities_data)
-        return activities_data
+        return data
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)

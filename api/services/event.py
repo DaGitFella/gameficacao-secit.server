@@ -1,4 +1,5 @@
 from django.db.models import QuerySet
+from rest_framework import serializers
 
 from api.models import Event
 from api.models.conquest import Conquest
@@ -54,7 +55,7 @@ class EventService:
         print(event_data["awards"])
         print()
 
-        awards = AwardService.create_from_serializer(event, event_data['awards']),
+        awards = AwardService.create_from_data_list(event, event_data['awards']),
 
         print('\n--- awards in EventService.create after AwardService ---')
         print(awards)
@@ -80,14 +81,14 @@ class EventService:
 
     @staticmethod
     def put_stamps_entities_in_activities_data(stamps: list[Stamp], event_data: dict):
-        stamps = [
+        ordered_stamps = [
             StampService.get_by_icon(activity_data['stamp']['icon'], stamps)
             for activity_data in event_data['activities']
         ]
 
         activities = [
             {**activity_data, "stamp": stamp}
-            for activity_data, stamp in zip(event_data['activities'].data, stamps)
+            for activity_data, stamp in zip(event_data['activities'].data, ordered_stamps)
         ]
 
         print('\n--- activities in EventService.put_stamps_entities_in_activities_data ---')
@@ -103,7 +104,7 @@ class EventService:
 
     @staticmethod
     def raise_if_invalid_conquests(conquests_data):
-        raise NotImplementedError()
+        raise serializers.ValidationError("CONQUESTS INVALID!")
 
     @staticmethod
     def raise_if_invalid_awards(awards_data):

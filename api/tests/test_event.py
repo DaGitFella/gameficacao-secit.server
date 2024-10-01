@@ -1,13 +1,11 @@
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from api.models import Event
-from api.models.activity import Activity
 from api.serializers.event import EventSerializer
 from api.tests import BASE_URL
 from api.tests.event_environment_manager import EventEnvironmentManager
 from api.tests.user_environment_manager import UserEnvironmentManager
-
+from pprint import pprint
 
 class EventTestCase(APITestCase):
     event_manager = EventEnvironmentManager()
@@ -53,6 +51,13 @@ class EventTestCase(APITestCase):
 
         self.assertEqual(received_awards, data['awards'])
 
+    def test_post__event_2(self):
+        pass
+
+    # activities->stamp must be declared before, in conquests->stamps
+    def test_post__event_3(self):
+        pass
+
     def test_get__created_events_on_happy_path__should_return_OK(self):
         self.event_manager.set_database_environment({"secit-2024": True, "sipex-2024": True})
 
@@ -81,14 +86,46 @@ class EventTestCase(APITestCase):
 class EventSerializerTestCase(APITestCase):
     event_manager = EventEnvironmentManager()
     user_manager = UserEnvironmentManager()
-    serializer = EventSerializer()
 
-    def test_create__on_happy_path__should_return_OK(self):
-        self.event_manager.set_database_environment({"secit-2024": False})
-        event_data = self.event_manager.get_data("secit-2024")
-        event_data.update({"user": self.user_manager.retrieve_user("admin-user")})
+    # conquests->color must be a valid hex color code
+    def test_conquest_is_valid__invalid_conquest_color__should_return_false(self):
+        data = self.event_manager.get_data("secit-2024")
+        data["conquests"] = [
+            {**conquest, "color": "NotHex"}
+            for conquest in data["conquests"]
+        ]
 
-        event = self.serializer.create(event_data)
+        self.user_manager.set_database_environment({"admin-user": True})
+        data["user_who_created"] = self.user_manager.retrieve_user("admin-user").id
 
-        self.assertIsInstance(event, Event)
-        self.assertIsInstance(event.activities.all()[0], Activity)
+        serializer = EventSerializer(data=data)
+
+        is_valid = serializer.is_valid()
+        print("--- serializer.errors in EventSerializerTestCase."
+              "test_conquest_is_valid__invalid_conquest_color__should_return_false ---")
+        print(serializer.errors)
+
+        self.assertFalse(is_valid)
+
+    # conquests->stamps->icon must be unique inside event
+    def test_conquest_is_valid__not_unique_stamps_icons__should_return_false(self):
+        data = self.event_manager.get_data("secit-2024")
+        data["conquests"] = [
+            {
+                **conquest,
+                "stamps": [{"icon": "bad-and-not-unique-filename.png"}] * len(conquest["stamps"])
+            }
+            for conquest in data["conquests"]
+        ]
+
+        self.user_manager.set_database_environment({"admin-user": True})
+        data["user_who_created"] = self.user_manager.retrieve_user("admin-user").id
+
+        serializer = EventSerializer(data=data)
+
+        is_valid = serializer.is_valid()
+        print("--- serializer.errors in EventSerializerTestCase."
+              "test_conquest_is_valid__not_unique_stamps_icons__should_return_false ---")
+        pprint(serializer.errors)
+
+        self.assertFalse(is_valid)
