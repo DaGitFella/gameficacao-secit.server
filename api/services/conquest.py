@@ -27,10 +27,6 @@ class ConquestService:
         )
 
     @staticmethod
-    def raise_if_invalid(conquests):
-        pass
-
-    @staticmethod
     def validate_all(conquests: list[dict]):
         invalid_conquests_due_to_stamp_icon = ConquestService.validate_stamps_icon_unicity(conquests)
 

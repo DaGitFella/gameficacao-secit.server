@@ -17,7 +17,3 @@ class AwardService:
             available_quantity=data['max_quantity'],
             event=event,
         )
-
-    @staticmethod
-    def raise_if_invalid(awards):
-        pass

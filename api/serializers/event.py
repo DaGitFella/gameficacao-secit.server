@@ -38,6 +38,11 @@ class EventSerializer(serializers.ModelSerializer):
         for serializer in serializers_to_validate:
             serializer.validate(serializer.initial_data)
 
+        data["activities"].validate_stamps_icons(
+            data["conquests"].initial_data,
+            data["activities"].initial_data
+        )
+
         return data
 
     def to_representation(self, instance):
