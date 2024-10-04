@@ -1,5 +1,4 @@
 from django.db.models import QuerySet
-from rest_framework import serializers
 
 from api.models import Event
 from api.models.conquest import Conquest
@@ -8,17 +7,27 @@ from api.services.activity import ActivityService
 from api.services.award import AwardService
 from api.services.conquest import ConquestService
 from api.services.stamp import StampService
+from api.services.user import UserService
 
 
 class EventService:
     @staticmethod
     def create(serializer):
         event_data = serializer.validated_data
+        print("--- event_data in EventService.create ---")
+        print(event_data)
+        print()
+        print("--- serializer.errors in EventService.create ---")
+        print(serializer.errors)
+        print()
+
+        # user_who_created = UserService.get_from_pk(event_data["user_who_created_id"])
+
         event = Event(
             name=event_data['name'],
             year=event_data['year'],
             edition_number=event_data['edition_number'],
-            user_who_created=event_data['user_who_created'],
+            user_who_created=event_data["user_who_created_id"],
         )
 
         Event.objects.save(event)
@@ -37,6 +46,7 @@ class EventService:
         print('\n--- event_data["activities"] in EventService.create before Stamps ---')
         print(event_data["activities"])
         print()
+        print('\n--- event_data["stamps"] in EventService.create before Stamps ---')
         print(event_data["stamps"])
         print()
 
@@ -77,6 +87,10 @@ class EventService:
                 for stamp_data in stamps_data['stamps']
             ])
 
+        print("--- stamps in EventService.put_conquests_entities_in_data ---")
+        print(stamps)
+        print()
+
         return {**event_data, 'stamps': stamps}
 
     @staticmethod
@@ -98,18 +112,21 @@ class EventService:
         return {**event_data, 'activities': activities}
 
     @staticmethod
+    def merge_exceptions_details(first_detail, second_detail):
+        keys_in_common = first_detail.keys() & second_detail.keys()
+        merged_details = {}
+
+        for key in keys_in_common:
+            merged_details[key] = []
+            for first, second in zip(first_detail[key], second_detail[key]):
+                merged_details[key].append({**first, **second})
+
+            first_detail.pop(key)
+            second_detail.pop(key)
+
+        return {**first_detail, **second_detail, **merged_details}
+
+    @staticmethod
     def get_all_from(user, should_get_created_events: bool):
         query_set: QuerySet = Event.objects.get_all_from(user, should_get_created_events)
-        return list(query_set.values())
-
-    @staticmethod
-    def raise_if_invalid_conquests(conquests_data):
-        raise serializers.ValidationError("CONQUESTS INVALID!")
-
-    @staticmethod
-    def raise_if_invalid_awards(awards_data):
-        raise NotImplementedError()
-
-    @staticmethod
-    def raise_if_invalid_activities(activities_data):
-        raise NotImplementedError()
+        return list(query_set)

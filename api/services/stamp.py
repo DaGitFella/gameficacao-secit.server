@@ -28,4 +28,8 @@ class StampService:
 
     @staticmethod
     def get_by_icon(stamp_icon: str, stamps: list[Stamp]):
+        print("--- stamps in StampService.get_by_icon ---")
+        print(stamps)
+        print(stamp_icon)
+        print()
         return next(filter(lambda stamp: stamp.icon == stamp_icon, stamps))

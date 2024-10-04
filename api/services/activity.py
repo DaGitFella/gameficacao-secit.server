@@ -27,12 +27,16 @@ class ActivityService:
         if are_all_valid:
             return []
 
-        get_detail = lambda is_valid: None if is_valid else "Stamp icons must be in conquest stamps."
-
         errors = [
-            {i: {"stamp": get_detail(ActivityService.is_activity_valid(activity, conquests_icons))}}
-            for i, activity in enumerate(activities)
+            {} if ActivityService.is_activity_valid(activity, conquests_icons)
+            else {"stamp": "Stamp icons must be in conquest stamps."}
+            for activity in activities
         ]
+
+        print("--- is_activity_valid for each activity in ActivityService.validate_stamps_icons")
+        for activity in activities:
+            print(ActivityService.is_activity_valid(activity, conquests_icons), end=" | ")
+        print()
 
         return errors
 

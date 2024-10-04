@@ -1,9 +1,10 @@
 import re
 from collections import Counter
 from functools import reduce
+from pprint import pprint
 
 from api.models.conquest import Conquest
-from pprint import pprint
+
 
 class ConquestService:
     @staticmethod
@@ -11,6 +12,10 @@ class ConquestService:
         print('--- map result in ConquestService ---')
         print([ConquestService.create(event, data) for data in data_list])
         print(type(data_list))
+
+        for data in data_list:
+            print(data, end=" | ")
+
         print()
         return Conquest.objects.save(
             [ConquestService.create(event, data) for data in data_list]
@@ -28,48 +33,25 @@ class ConquestService:
 
     @staticmethod
     def validate_all(conquests: list[dict]):
-        invalid_conquests_due_to_stamp_icon = ConquestService.validate_stamps_icon_unicity(conquests)
-
-        validation_data = [
-            {
-                "data": {
-                    "color": ConquestService.validate_color(conquest["color"]),
-                    "stamps": invalid_conquests_due_to_stamp_icon[i]
-                },
-                "index": i
-            }
-
-            for i, conquest in enumerate(conquests)
-        ]
-
-        not_valid_data = [
-            {
-                "data": {
-                    key: item["detail"]
-                    for key, item in d["data"].items()
-                    if not item["is_valid"]
-                },
-                "index": d["index"]
-            }
-
-            for d in validation_data
-        ]
-
-        not_valid_data = filter(lambda d: d["data"] != {}, not_valid_data)
-
         errors = [
-            {d["index"]: d["data"]}
-            for d in not_valid_data
+            {"stamps": validation_data["detail"]} if not validation_data["is_valid"] else {}
+            for validation_data in ConquestService.validate_stamps_icon_unicity(conquests)
         ]
 
+        REDUCE_RESULT = reduce(lambda e1, e2: (e1 == {} or e1) and e2 == {}, errors)
         print('\n--- errors in ConquestService.validate ---')
         pprint(errors)
+        print(f'reduce result: {REDUCE_RESULT}')
         print()
+
+
+        if REDUCE_RESULT:
+            errors = []
 
         return errors
 
     @staticmethod
-    def validate_stamps_icon_unicity(conquests: list[dict]) -> dict:
+    def validate_stamps_icon_unicity(conquests: list[dict]) -> list:
         INVALID_VALIDATION_DATA = {"is_valid": False, "detail": "Icons filenames must be unique for the same event."}
         VALID_VALIDATION_DATA = {"is_valid": True, "detail": None}
 
@@ -85,15 +67,12 @@ class ConquestService:
                 if ConquestService.conquest_has_icons(conquest, duplicated_icons)
             ]
 
-            return {
-                i: (INVALID_VALIDATION_DATA if i in invalid_conquests_ids else VALID_VALIDATION_DATA)
+            return [
+                INVALID_VALIDATION_DATA if i in invalid_conquests_ids else VALID_VALIDATION_DATA
                 for i in range(len(conquests))
-            }
+            ]
 
-        return {
-            i: VALID_VALIDATION_DATA
-            for i in range(len(conquests))
-        }
+        return [VALID_VALIDATION_DATA] * len(conquests)
 
     @staticmethod
     def get_icons_from_conquests(conquests: list[dict]) -> list[str]:
@@ -108,7 +87,12 @@ class ConquestService:
     @staticmethod
     def conquest_has_icons(conquest: dict, icons: list) -> bool:
         conquest_icons = [stamp["icon"] for stamp in conquest["stamps"]]
-        return set(conquest_icons).intersection(set(icons)) is not None
+
+        # print(conquest_icons, icons, sep=" -=|-|-|=- ")
+        # print(set(conquest_icons).intersection(set(icons)))
+        # print()
+
+        return set(conquest_icons).intersection(set(icons)) != set()
 
     @staticmethod
     def validate_color(value: str) -> dict:

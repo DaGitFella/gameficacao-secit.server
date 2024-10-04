@@ -9,11 +9,13 @@ from api.services.conquest import ConquestService
 
 class ConquestListSerializer(CustomListSerializer):
     def validate(self, conquests):
-        print("Passing through ConquestSerializer.validate")
+        # print("Passing through ConquestSerializer.validate")
 
         errors = ConquestService.validate_all(conquests)
         if errors:
             raise serializers.ValidationError({"conquests": errors})
+
+        super().validate(conquests)
 
         return conquests
 
@@ -30,6 +32,6 @@ class ConquestSerializer(serializers.ModelSerializer):
     def validate_color(value: str):
         validation_data = ConquestService.validate_color(value)
         if not validation_data["is_valid"]:
-            raise serializers.ValidationError(validation_data["message"])
+            raise serializers.ValidationError(validation_data["detail"])
 
         return value

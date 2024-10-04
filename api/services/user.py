@@ -8,11 +8,11 @@ class UserService:
         return User.objects.get(username=serializer.data['username'])
 
     @staticmethod
-    def get_from_pk(pk):
+    def get_from_pk(pk: int):
         return User.objects.get(pk=pk)
 
     @staticmethod
-    def get_serializer_from_pk(pk):
+    def get_serializer_from_pk(pk: int):
         user = UserService.get_from_pk(pk)
         serializer = UserSerializer(user)
 
@@ -22,3 +22,8 @@ class UserService:
         print()
 
         return serializer
+
+    @staticmethod
+    def get_data_from_pk(pk: int):
+        serializer = UserService.get_serializer_from_pk(pk)
+        return serializer.data

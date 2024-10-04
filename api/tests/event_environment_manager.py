@@ -1,6 +1,7 @@
 import api.models
 from api.models.event import Event
 from api.serializers.event import EventSerializer
+from api.services.event import EventService
 from api.tests.user_environment_manager import UserEnvironmentManager
 import json
 
@@ -43,8 +44,8 @@ class EventEnvironmentManager:
             "year": "2024",
             "edition_number": 3,
             "conquests": [
-                {"name": "voluntario", "color": "vermelho", "required_stamps": 1, "stamps": [{"icon": "s1.png"}], "min_stamp_types_amount": 1},
-                {"name": "apresentador", "color": "azul", "required_stamps": 1, "stamps": [{"icon": "s2.png"}], "min_stamp_types_amount": 1},
+                {"name": "voluntario", "color": "1AB43F", "required_stamps": 1, "stamps": [{"icon": "s1a.png"}, {"icon": "s1b.png"}], "min_stamp_types_amount": 1},
+                {"name": "apresentador_sipex", "color": "1AB43F", "required_stamps": 1, "stamps": [{"icon": "s2.png"}], "min_stamp_types_amount": 1},
             ],
             "awards": [
                 {"description": "bottom branco", "required_conquests": 2, "max_quantity": 150},
@@ -52,9 +53,9 @@ class EventEnvironmentManager:
                 {"description": "copo e selo gamer", "required_conquests": 4, "max_quantity": 150},
             ],
             "activities": [
-                {"type": "palestra", "stamps_amount": 1, "stamp": {"icon": "s1.png"}},
-                {"type": "roda de conversa", "stamps_amount": 1, "stamp": {"icon": "s1.png"}},
-                {"type": "mesa redonda", "stamps_amount": 1, "stamp": {"icon": "s1.png"}},
+                {"type": "palestra", "stamps_amount": 1, "stamp": {"icon": "s1a.png"}},
+                {"type": "roda de conversa", "stamps_amount": 1, "stamp": {"icon": "s1a.png"}},
+                {"type": "mesa redonda", "stamps_amount": 1, "stamp": {"icon": "s1a.png"}},
                 {"type": "apresentação", "stamps_amount": 1, "stamp": {"icon": "s2.png"}},
             ]
         },
@@ -91,23 +92,24 @@ class EventEnvironmentManager:
         return event_id and Event.objects.filter(id=event_id).exists()
 
     def create(self, key: str, user: api.models.User):
-        data = self.events_data[key]
+        data = self.get_data(key)
         if self.exists(data["id"]):
             return None
 
-        print(f'--- {key} ---')
+        print(f'--- {key} in EventEnvironmentManager.create ---')
         print(data)
         json_data = json.dumps(data, indent=4)
         print(json_data)
         print()
 
-        data['user_who_created'] = user
-        data_copy = data.copy()
-        data_copy.pop("id")
+        data.update({"user_who_created_id": user.id})
+        # data_copy = data.copy()
+        # data_copy.pop("id")
 
-        serializer = EventSerializer(data=data_copy)
-        serializer.is_valid()
-        event = serializer.create(serializer.validated_data)
+        serializer = EventSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+
+        event = EventService.create(serializer)
         self.events_data[key]["id"] = event.id
 
     def delete(self, key: str):

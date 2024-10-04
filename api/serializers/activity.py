@@ -8,8 +8,12 @@ from api.services.activity import ActivityService
 
 class ActivityListSerializer(CustomListSerializer):
     @staticmethod
-    def validate_stamps_icons(conquests: list[dict], activities: list[dict]) -> list[dict]:
+    def validate_stamps_icons(conquests: list[dict], activities: list[dict]):
         errors = ActivityService.validate_stamps_icons(conquests, activities)
+
+        print("--- errors in ActivityListSerializer.validate_stamps_icons ---")
+        print(errors)
+
         if errors:
             raise serializers.ValidationError({"activities": errors})
 
