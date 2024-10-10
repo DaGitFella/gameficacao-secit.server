@@ -4,6 +4,7 @@ from functools import reduce
 from pprint import pprint
 
 from api.models.conquest import Conquest
+from api.models.stamp import Stamp
 
 
 class ConquestService:
@@ -32,7 +33,7 @@ class ConquestService:
         )
 
     @staticmethod
-    def validate_all(conquests: list[dict]):
+    def validate_all(conquests: list[dict]) -> list:
         errors = [
             {"stamps": validation_data["detail"]} if not validation_data["is_valid"] else {}
             for validation_data in ConquestService.validate_stamps_icon_unicity(conquests)
@@ -43,7 +44,6 @@ class ConquestService:
         pprint(errors)
         print(f'reduce result: {REDUCE_RESULT}')
         print()
-
 
         if REDUCE_RESULT:
             errors = []
@@ -102,3 +102,17 @@ class ConquestService:
             return {"is_valid": False, "detail": "Color must be an hex string of six characters."}
 
         return {"is_valid": True, "detail": None}
+
+    @staticmethod
+    def get_stamps_from_conquest_instances(conquests: list[Conquest]) -> list[Stamp]:
+        reduce_result = reduce(lambda c1, c2: c1.stamps + c2.stamps, conquests)
+
+        print("--- reduce result in ConquestService.get_stamps_from_conquest_instances ---")
+        print(reduce_result)
+        print()
+
+        return reduce_result
+
+    @staticmethod
+    def delete_related(event):
+        Conquest.objects.filter(event_id=event.id).delete()

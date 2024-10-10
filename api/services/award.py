@@ -17,3 +17,7 @@ class AwardService:
             available_quantity=data['max_quantity'],
             event=event,
         )
+
+    @staticmethod
+    def delete_related(event):
+        Award.objects.filter(event_id=event.id).delete()

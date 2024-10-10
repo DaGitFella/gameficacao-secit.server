@@ -2,6 +2,7 @@ from functools import reduce
 
 from api.models.conquest import Conquest
 from api.models.stamp import Stamp
+from api.services.conquest import ConquestService
 
 
 class StampService:
@@ -33,3 +34,7 @@ class StampService:
         print(stamp_icon)
         print()
         return next(filter(lambda stamp: stamp.icon == stamp_icon, stamps))
+
+    @staticmethod
+    def delete_related(event):
+        Stamp.objects.filter(conquest__event_id=event.id).delete()

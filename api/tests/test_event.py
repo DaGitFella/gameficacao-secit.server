@@ -78,17 +78,52 @@ class EventTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_put__on_happy_path__should_return_NO_CONTENT(self):
-        self.event_manager.set_database_environment({"secit-2024": True})
+        self.event_manager.set_database_environment({"secit-2024": True, "sipex-2024": False})
+
+        sipex_data = self.event_manager.get_data("sipex-2024")
 
         edited_data = self.event_manager.get_data("secit-2024")
         edited_data["name"] = "edited name"
-        edited_data["conquests"] = \
-            self.event_manager.get_data("sipex-2024")["conquests"]
+        edited_data["conquests"] = sipex_data["conquests"]
+        edited_data["activities"] = sipex_data["activities"]
 
-        response = self.client.put(f"{BASE_URL}/events", edited_data,
-                                   headers=self.user_manager.get_credentials("admin-user"))
+        print("id in EventTestCase.test_put__on_happy_path__should_return_NO_CONTENT")
+        print(edited_data['id'], f"{BASE_URL}/events/{edited_data['id']}", sep=" | ")
+        print()
+
+        response = self.client.put(f"{BASE_URL}/events/{edited_data['id']}", edited_data,
+                                   headers=self.user_manager.get_credentials("admin-user"),
+                                   format="json")
+
+        print("--- response message in EventTestCase.test_put__on_happy_path__should_return_NO_CONTENT ---")
+        print(response)
+        print()
 
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(self.event_manager.retrieve("secit-2024").name, "edited name")
+
+    def test_delete__on_happy_path__should_return_NO_CONTENT(self):
+        self.event_manager.set_database_environment({"secit-2024": True})
+
+        event_id = self.event_manager.get_data("secit-2024")["id"]
+
+        response = self.client.delete(f"{BASE_URL}/events/{event_id}",
+                                      headers=self.user_manager.get_credentials("admin-user"))
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(self.event_manager.exists(event_id))
+
+    def test_delete__non_existent_id__should_return_NOT_FOUND(self):
+        self.event_manager.set_database_environment({"secit-2024": True})
+
+        event_id = self.event_manager.get_data("secit-2024")["id"]
+        non_existent_event_id = 999999
+
+        response = self.client.delete(f"{BASE_URL}/events/{non_existent_event_id}",
+                                      headers=self.user_manager.get_credentials("admin-user"))
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertTrue(self.event_manager.exists(event_id))
 
 
 class EventSerializerTestCase(APITestCase):
@@ -97,6 +132,10 @@ class EventSerializerTestCase(APITestCase):
 
     def test_is_valid__on_happy_path__should_return_true(self):
         data = self.event_manager.get_data("secit-2024")
+
+        print("--- data in EventSerializerTestCase.test_is_valid__on_happy_path__should_return_true ---")
+        print(data)
+        print()
 
         self.user_manager.set_database_environment({"admin-user": True})
         data["user_who_created_id"] = self.user_manager.retrieve_user("admin-user").id
@@ -242,7 +281,7 @@ class EventSerializerTestCase(APITestCase):
         data.pop("name")
 
         invalid_conquests = []
-        for conquest in data["conquests"]:
+        for conquest in data["conquests"].copy():
             conquest.pop("name")
             invalid_conquests.append(conquest)
 

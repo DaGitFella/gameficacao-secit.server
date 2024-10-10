@@ -1,6 +1,7 @@
 from functools import reduce
 from pprint import pprint
 
+from django.http import QueryDict
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.relations import PrimaryKeyRelatedField
@@ -29,11 +30,16 @@ class EventSerializer(serializers.ModelSerializer):
         print(data)
         print()
 
-        # data["user_who_created"] = data["user_who_created_id"]
-        # data["user_who_created"] =
+        print(self.instance)
+        print()
+
+        if self.instance is not None:
+            data["user_who_created_id"] = self.instance.user_who_created.id
+
         try:
             internal_value = super().to_internal_value(data)
         except ValidationError as standard_exceptions:
+            standard_exceptions_detail = EventService.organize_non_field_errors(standard_exceptions.detail)
 
             data = {
                 **data,
@@ -45,13 +51,13 @@ class EventSerializer(serializers.ModelSerializer):
             try:
                 self.validate(data)
             except ValidationError as custom_exceptions:
-                print("--- standard_exceptions.detail in EventSerializer.to_internal_value ---")
-                print(standard_exceptions.detail, end="\n\n")
+                print("--- standard_exceptions_detail in EventSerializer.to_internal_value ---")
+                print(standard_exceptions_detail, end="\n\n")
                 print("--- custom_exceptions.detail in EventSerializer.to_internal_value ---")
                 print(custom_exceptions.detail, end="\n\n")
 
                 merged_details = \
-                    EventService.merge_exceptions_details(custom_exceptions.detail, standard_exceptions.detail)
+                    EventService.merge_exceptions_details(custom_exceptions.detail, standard_exceptions_detail)
 
                 print("--- merged_details in EventSerializer.to_internal_value ---")
                 print(merged_details, end="\n\n")
@@ -87,17 +93,19 @@ class EventSerializer(serializers.ModelSerializer):
     # Try to understand why it is happening
 
     def validate(self, data):
-        print("\n" * 5)
+        print("\n")
         print("--- inside EventSerializer.validate ---")
-        print("\n" * 5)
+        print("\n")
 
-        serializers_to_validate = [data["conquests"], data["awards"], data["activities"]]
+        serializers_keys: list[str] = ["conquests", "awards", "activities"]
         errors = []
-        for serializer in serializers_to_validate:
+        for key in serializers_keys:
+            serializer = data[key]
+
             try:
                 serializer.validate(serializer.initial_data)
             except serializers.ValidationError as err:
-                errors.append(err.detail)
+                errors.append({key: err.detail})
 
         try:
             data["activities"].validate_stamps_icons(
@@ -105,14 +113,19 @@ class EventSerializer(serializers.ModelSerializer):
                 data["activities"].initial_data
             )
         except serializers.ValidationError as err:
-            errors.append(err.detail)
+            errors.append({"activities": err.detail})
 
+        print()
+        print("--- errors before reduce in EventSerializer.validate ---")
+        pprint(errors)
+        print()
 
         if errors:
             errors = reduce(lambda e1, e2: {**e1, **e2}, errors, {})
 
-            print("--- errors in EventSerializer.validate ---")
+            print("--- errors after reduce in EventSerializer.validate ---")
             pprint(errors)
+            print()
             raise serializers.ValidationError(errors)
 
         return data

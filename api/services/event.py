@@ -1,4 +1,7 @@
+# from collections.abc import dict_keys
+
 from django.db.models import QuerySet
+from django.template.context_processors import static
 
 from api.models import Event
 from api.models.conquest import Conquest
@@ -7,7 +10,6 @@ from api.services.activity import ActivityService
 from api.services.award import AwardService
 from api.services.conquest import ConquestService
 from api.services.stamp import StampService
-from api.services.user import UserService
 
 
 class EventService:
@@ -31,7 +33,12 @@ class EventService:
         )
 
         Event.objects.save(event)
+        EventService.create_related_entities(event, event_data)
 
+        return event
+
+    @staticmethod
+    def create_related_entities(event, event_data):
         print("--- event_data['conquests'] in EventService ---")
         print(event_data['conquests'])
         print()
@@ -70,8 +77,6 @@ class EventService:
         print('\n--- awards in EventService.create after AwardService ---')
         print(awards)
         print()
-
-        return event
 
     @staticmethod
     def put_conquests_entities_in_data(conquests: list[Conquest], event_data: dict):
@@ -116,17 +121,71 @@ class EventService:
         keys_in_common = first_detail.keys() & second_detail.keys()
         merged_details = {}
 
+        print('--- mergin objects in EventService.merge_exceptions_details ---')
+
         for key in keys_in_common:
             merged_details[key] = []
             for first, second in zip(first_detail[key], second_detail[key]):
+                print(f"key: {key}\n"
+                      f"first_detail: {first_detail}\n"
+                      f"second_detail: {second_detail}\n"
+                      f"first: {first},  {type(first)}\n"
+                      f"second: {second}, {type(second)}\n")
+
                 merged_details[key].append({**first, **second})
 
             first_detail.pop(key)
             second_detail.pop(key)
 
+        print()
+
         return {**first_detail, **second_detail, **merged_details}
+
+    @staticmethod
+    def organize_non_field_errors(exceptions: dict):
+        print("!@¨&$*!#¨(*\n$&!¨(#*&¨!(*\n\n&#¨(" * 2)
+
+        organized_exceptions = {}
+        print("--- exceptions[key].keys() in EventService.organize_non_field_errors ---")
+        for key in exceptions:
+            print(
+                f"{key} | {exceptions[key]} | {type(exceptions[key])} | {isinstance(exceptions[key], dict)} & {'non_field_errors' in exceptions[key]}")
+
+            if isinstance(exceptions[key], dict) and "non_field_errors" in exceptions[key]:
+                organized_exceptions[key] = exceptions[key]["non_field_errors"]
+            else:
+                organized_exceptions[key] = exceptions[key]
+
+        return organized_exceptions
 
     @staticmethod
     def get_all_from(user, should_get_created_events: bool):
         query_set: QuerySet = Event.objects.get_all_from(user, should_get_created_events)
         return list(query_set)
+
+    @staticmethod
+    def update(serializer):
+        data = serializer.validated_data
+        event: Event = serializer.instance
+
+        event.name = data['name']
+        event.edition_number = data['edition_number']
+
+        event.save()
+
+        EventService.delete_related_entities(event)
+        EventService.create_related_entities(event, data)
+
+    @staticmethod
+    def delete_related_entities(event):
+        for service in [ActivityService, StampService, ConquestService, AwardService]:
+            service.delete_related(event)
+
+    @staticmethod
+    def entity_exists(pk: int):
+        return Event.objects.filter(id=pk).exists()
+
+    @staticmethod
+    def delete(pk: int):
+        event = Event.objects.get(id=pk)
+        event.delete()

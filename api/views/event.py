@@ -56,16 +56,45 @@ class EventView(APIView):
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
+
+class EventUpdateDeleteView(APIView):
     @staticmethod
-    def put(request):
+    def get(request, pk):
+        raise NotImplementedError()
+
+    @staticmethod
+    def put(request, pk):
         if not request.user.is_authenticated:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         if request.user.role != api.models.User.Roles.ADMIN:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
+        if not EventService.entity_exists(pk):
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
+        instance = Event.objects.get(pk=pk)
+        serializer = EventSerializer(instance, data=request.data)
+
+        if not serializer.is_valid():
+            print(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        EventService.update(serializer)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     @staticmethod
-    def delete(request):
-        raise NotImplementedError()
+    def delete(request, pk):
+        if not request.user.is_authenticated:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        if request.user.role != api.models.User.Roles.ADMIN:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        if not EventService.entity_exists(pk):
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        EventService.delete(pk)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)

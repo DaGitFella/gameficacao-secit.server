@@ -62,14 +62,22 @@ class EventEnvironmentManager:
     }
 
     def update_data_ids(self, ids: dict[str, int]):
-        for event_name, data_id in ids.items():
-            self.events_data[event_name]["id"] = data_id
+        for event_name, event_id in ids.items():
+            self.events_data[event_name]["id"] = event_id
 
     def get_data(self, event_name: str):
-        data = self.events_data[event_name].copy()
-        # data.pop("id")
+        data = self.events_data[event_name]
 
-        return data
+        new_data = {}
+        for key, item in data.items():
+            if isinstance(item, dict):
+                new_data[key] = item.copy()
+            elif isinstance(item, list):
+                new_data[key] = [element.copy() for element in item]
+            else:
+                new_data[key] = item
+
+        return new_data
 
     def set_database_environment(self, environment: dict[str, bool]):
         self.user_env_manager.set_database_environment({"admin-user": True})
@@ -83,7 +91,7 @@ class EventEnvironmentManager:
         for key, must_create in environment.items():
             actions[must_create](key)
 
-    def retrieve(self, event_name: str):
+    def retrieve(self, event_name: str) -> Event:
         event_id = self.events_data[event_name]["id"]
         return Event.objects.get(id=event_id)
 

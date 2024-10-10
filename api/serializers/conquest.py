@@ -9,11 +9,15 @@ from api.services.conquest import ConquestService
 
 class ConquestListSerializer(CustomListSerializer):
     def validate(self, conquests):
-        # print("Passing through ConquestSerializer.validate")
-
         errors = ConquestService.validate_all(conquests)
+
+        print("--- errors in ConquestSerializer.validate ---")
+        print(errors)
+        print()
+
         if errors:
-            raise serializers.ValidationError({"conquests": errors})
+            raise serializers.ValidationError(errors)
+            # raise serializers.ValidationError(errors)
 
         super().validate(conquests)
 

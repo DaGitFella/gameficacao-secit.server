@@ -47,3 +47,7 @@ class ActivityService:
     @staticmethod
     def is_activity_valid(activity: dict, conquests_icons: list[str]) -> bool:
         return activity["stamp"]["icon"] in conquests_icons
+
+    @staticmethod
+    def delete_related(event):
+        Activity.objects.filter(event_id=event.id).delete()

@@ -15,7 +15,7 @@ class ActivityListSerializer(CustomListSerializer):
         print(errors)
 
         if errors:
-            raise serializers.ValidationError({"activities": errors})
+            raise serializers.ValidationError(errors)
 
 class ActivitySerializer(serializers.ModelSerializer):
     class Meta:
